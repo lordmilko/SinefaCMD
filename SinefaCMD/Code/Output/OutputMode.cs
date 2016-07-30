@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SinefaCMD.Output.Type;
+﻿using SinefaCMD.Output.Type;
 
 namespace SinefaCMD.Output
 {

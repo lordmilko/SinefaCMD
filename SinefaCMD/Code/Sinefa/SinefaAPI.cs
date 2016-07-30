@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Threading;
@@ -95,6 +92,39 @@ namespace SinefaCMD.Sinefa
 
         public List<Host> GetHosts(JObject data)
         {
+            var probe = GetProbe(data);
+
+            if (probe != null)
+            {
+                return GetHostsFromProbe(probe);
+            }
+
+            data = GetLiveTraffic();
+            probe = GetProbe(data);
+
+            if (probe != null)
+            {
+                return GetHostsFromProbe(probe);
+            }
+
+
+            throw new ProbeNotFoundException();
+        }
+
+        List<Host> GetHostsFromProbe(JToken probe)
+        {
+            var hosts = probe.Children()["int-hosts"].Children().Select(host => new Host
+            {
+                IPAddress = host["int-host"].ToString(),
+                Down = Math.Round(Convert.ToDouble(host["bytes-in"]) * 8 / (1024 * 1024), 2),
+                Up = Math.Round(Convert.ToDouble(host["bytes-out"]) * 8 / (1024 * 1024))
+            }).OrderByDescending(host => host.Down).ToList();
+
+            return hosts;
+        }
+
+        JToken GetProbe(JObject data)
+        {
             var sources = data.Descendants("sources");
             var probe = sources.SelectMany(
                 source => source.Children().SelectMany(
@@ -104,41 +134,23 @@ namespace SinefaCMD.Sinefa
                 )
             ).FirstOrDefault();
 
-            if (probe != null)
-            {
-                var hosts = probe.Children()["int-hosts"].Children().Select(host => new Host
-                {
-                    IPAddress = host["int-host"].ToString(),
-                    Down = Math.Round(Convert.ToDouble(host["bytes-in"]) * 8 / (1024 * 1024), 2),
-                    Up = Math.Round(Convert.ToDouble(host["bytes-out"]) * 8 / (1024 * 1024))
-                }).OrderByDescending(host => host.Down).ToList();
-
-                return hosts;
-            }
-
-            //sinefa recommend asking twice for probes in case they take a while to respond
-            //also we need to handle the case where the probe is offline
-            //also all the other methods need to handle this too - right now they just plow on right ahead
-            throw new NotImplementedException("handling a probe not being found is not implemented"); //need to handle couldnt find our probe
+            return probe;
         }
 
         public IEnumerable<Host> MonitorHost()
         {
             foreach (var result in GetLiveTraffic(1000, settings.Duration.Value))
             {
-                var data = GetHosts(result);
-                var host = Dns.GetHostEntry(settings.Target);
+                var hosts = GetHosts(result);
+                var hostEntry = Dns.GetHostEntry(settings.Target);
 
-                var ourhost = data.FirstOrDefault(d => host.AddressList.Select(a => a.ToString()).Contains(d.IPAddress));
+                var host = hosts.FirstOrDefault(h => hostEntry.AddressList.Select(a => a.ToString()).Contains(h.IPAddress));
 
-                if (ourhost == null)
+                if (host == null)
                 {
-                    throw new NotImplementedException("host couldnt be found in sinefa");
+                    throw new HostNotFoundException(settings.Target);
                 }
-                else
-                    yield return ourhost;
-                
-                //allow doing an ip address or a hostname - need to resolve either to a hostname 
+                yield return host;
             }
         }
 

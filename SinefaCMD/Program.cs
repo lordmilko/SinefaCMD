@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
 using System.Linq;
-using System.Management;
-using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Microsoft.Management.Infrastructure;
-using Newtonsoft.Json;
-using RestSharp;
-using Newtonsoft.Json.Linq;
 using SinefaCMD.Output;
 using SinefaCMD.Sinefa;
 
@@ -26,8 +14,15 @@ namespace SinefaCMD
             //test monitoring a host not in sinefa
             //pass a whole bunch of arguments or lots of spaces as args
             //should we impose a limit on the number of monitor recursions
+            //handle probenotfound and hostnotfound exceptions
+            //all sinefaapi methods need to be able to handle a probe not being found or a host not being found
+            //consoleoutput.monitor output needs to be formatted correctly
+            //consoleoutput.gethosts (but also any other method that displays the hostname) needs to be able to truncate hostnames that are super long
 
             //todo - features
+            //migrate username resolution to use management objects
+            //implement and test il merge
+            //make prtgoutput return the right number type
 
             try
             {
@@ -198,7 +193,7 @@ namespace SinefaCMD
             Console.WriteLine();
 
             Console.WriteLine("EXAMPLES");
-            Console.WriteLine("    SinefaCMD -APIKey 1111-2222 -Account 1234 -TopHost -Probe 0 -Output prtg");
+            Console.WriteLine("    SinefaCMD -APIKey 1111-2222 -Account 1234 -TopDown -Probe 0 -Output prtg");
             Console.WriteLine("    SinefaCMD -APIKey 1111-2222 -Account 5678 -ListProbes");
             Console.WriteLine("    SinefaCMD -APIKey 1111-2222 -ListHosts -Probe 1");
         }   

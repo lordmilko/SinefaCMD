@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DirectoryServices;
+﻿using System.DirectoryServices;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Management.Infrastructure;
 
 namespace SinefaCMD.Output

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SinefaCMD.Output
 {
@@ -12,7 +8,7 @@ namespace SinefaCMD.Output
         public System.Type Type { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OutputType" /> class.
+        /// Initializes a new instance of the <see cref="OutputTypeAttribute" /> class.
         /// </summary>
         /// <param name="type">A type that implements <see cref="IOutput"/> </param>
         public OutputTypeAttribute(System.Type type)

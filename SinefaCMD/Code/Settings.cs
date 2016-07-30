@@ -106,10 +106,8 @@ namespace SinefaCMD
                         throw new ArgumentMissingException("probe");
                     if (Duration == null)
                         Duration = 5;
-
                     break;
             }
-
         }
 
         SinefaMode GetMode(string str)
@@ -118,7 +116,6 @@ namespace SinefaCMD
 
             if (Mode != null & Mode.ToString().ToLower() != str1.ToLower())
                 throw new ArgumentException($"Processing mode '-{Mode.ToString().ToLower()}' conflicts with mode '-{str1}'");
-
 
             return ((SinefaMode[])typeof(SinefaMode).GetEnumValues()).Where(e => e.ToString().ToLower() == str1.ToLower()).First();
         }

@@ -61,7 +61,9 @@
     <Compile Include="Code\EnumExtensions.cs" />
     <Compile Include="Code\Exceptions\ArgumentMissingException.cs" />
     <Compile Include="Code\Exceptions\AttributeMissingException.cs" />
+    <Compile Include="Code\Exceptions\HostNotFoundException.cs" />
     <Compile Include="Code\Exceptions\OutputNotImplementedException.cs" />
+    <Compile Include="Code\Exceptions\ProbeNotFoundException.cs" />
     <Compile Include="Code\Exceptions\UnknownArgumentException.cs" />
     <Compile Include="Code\Host.cs" />
     <Compile Include="Code\Output\StandardOutput.cs" />

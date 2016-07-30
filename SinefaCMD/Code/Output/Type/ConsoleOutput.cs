@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SinefaCMD.Output.Type
 {
@@ -92,10 +90,6 @@ namespace SinefaCMD.Output.Type
 
                 
             }
-            //maybe we could take an argument that specifies whether this is the first logging attempt and therefore whether to show the header?
-
-            //OR, alternatively, we could have this method take the ienumerable<host> and do the iteration in here
-            //we need to only show the header the first time somehow
         }
 
         public void Error(Exception ex)
