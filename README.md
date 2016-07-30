@@ -90,7 +90,7 @@ Custom output modes can be specified by performing the following steps:
 
 #### Step 1: Implement IOutput
 
-`IOutput` defines all output actions known to SinefaCMD. Implementors are not required to fully implement the methods defined in this interface, as depending on your output method many of these methods may simply be unworkable (such as `Monitor()`).
+`IOutput` defines all output actions known to SinefaCMD. Implementors are not required to fully implement the methods defined in this interface, as depending on your output method many of these methods may simply be unworkable (such as `Monitor`).
 
 Custom output types are organized in the Code/Output/Type folder, under the `SinefaCMD.Output.Type` namespace. If you are interested in performing 'common' actions such as resolving a hosts IP Address to a hostname, or identifying the username of a given system, your type can also inherit from the `StandardOutput` class. Both `ConsoleOutput` and `PrtgOutput` provide examples of this behaviour
 
