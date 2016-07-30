@@ -66,7 +66,7 @@ namespace SinefaCMD.Output.Type
                 var hostname = GetHostname(host);
                 var username = GetUsername(hostname);
 
-                Console.WriteLine(" {0,-17}{1,-16}{2,-26}", host, hostname, username);
+                Console.WriteLine(" {0,-17}{1,-26}{2,-16}", host, hostname, username);
 
                 //when the hostname is too long that causes us to get a blank newline
             }
@@ -82,13 +82,14 @@ namespace SinefaCMD.Output.Type
             {
                 if (showHeader)
                 {
-                    Console.WriteLine("IP Address Down Up");
+                    Console.WriteLine(" {0,-17}{1,-9}{2,-9}", "IP Address", "Download", "Upload");
+                    Console.WriteLine(" {0,-17}{1,-9}{2,-9}", "----------------", "--------", "------");
                     showHeader = false;
                 }
 
-                Console.WriteLine($"{result.IPAddress} {result.Down} {result.Up}");
-
                 
+
+                Console.WriteLine(" {0,-17}{1,-9}{2,-9}", result.IPAddress, result.Down, result.Up);
             }
         }
 
