@@ -26,10 +26,7 @@ namespace SinefaCMD.Sinefa
             return GetLiveTraffic(0, 1).First();
         }
 
-        //does the data actually even change each time?
-
-        //test this works, also look at their email and see what sinefa had to say about how long you need to wait between each tick. if its in seconds, we need to change
-        //interval to be seconds and multiply by 1000 when doing thread.sleep to make it milliseconds
+        //maybe we should change this to be seconds and multiply by 1000 for the sleep on interval
         public IEnumerable<JObject> GetLiveTraffic(int interval, int iterations)
         {
             for (int i = 0; i < iterations; i++)
