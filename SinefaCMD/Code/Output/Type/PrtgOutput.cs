@@ -29,10 +29,8 @@ namespace SinefaCMD.Output.Type
                     new XElement("channel", "Bandwidth"),
                     new XElement("value", first.Down),
                     new XElement("float", 1),
-                    //new XElement("Unit", "BytesBandwidth"),
-                    new XElement("SpeedSize", "MegaBit")
-
-                //need to figure out how to specify the unit properly
+                    new XElement("Unit", "SpeedNet"),
+                    new XElement("VolumeSize", "MegaBit")
                 )
             );
 
