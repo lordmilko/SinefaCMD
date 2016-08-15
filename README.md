@@ -109,7 +109,7 @@ enum OutputMode
 }
 ```
 
-#### Step 3: Implement IOutput
+#### Step 3: Implement IOutput Methods
 
 As noted in Step 1, all methods defined by `IOutput` do not need to be implemented. Methods that are left unimplemented however should be configured to throw `OutputNotImplementedException`. This exception will dynamically determine the name of the unimplemented that was called, and display an error message via the `IOutput` `Error` method.
 
