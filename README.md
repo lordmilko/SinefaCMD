@@ -8,7 +8,7 @@ By default, SinefaCMD will output text to the console. Additional output methods
 * Console
 * PRTG Network Monitor
 
-SinefaCMD utilizes the RestSharp and Newtonsoft.Json NuGet packages. These packages will automatically be installed when you first compile the project.
+SinefaCMD utilizes the RestSharp and Newtonsoft.Json NuGet packages. These packages will automatically be installed when you first compile the project. Compile with Visual Studio 2015.
 
 ## Usage
 
